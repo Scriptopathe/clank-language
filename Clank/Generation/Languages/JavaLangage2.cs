@@ -61,7 +61,7 @@ namespace Clank.Core.Generation.Languages
         /// <returns></returns>
         string GetPackageName()
         {
-            return GetMetadata(m_project.Types.Types["State"], "package");
+            return GetMetadata(m_project.Types.Types[Core.Model.Language.SemanticConstants.StateClass], "package");
         }
 
 

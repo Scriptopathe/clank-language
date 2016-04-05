@@ -97,7 +97,7 @@ namespace Clank.Core.Generation.Languages
             });
 
             string bgcolor = "white";
-            if (decl.Name == "State") bgcolor = "blue";
+            if (decl.Name == Core.Model.Language.SemanticConstants.StateClass) bgcolor = "blue";
             if (decl.Name.Contains("Entity")) bgcolor = "red";
             bgcolor = "{bg:" + bgcolor + "}";
             StringBuilder b = new StringBuilder();

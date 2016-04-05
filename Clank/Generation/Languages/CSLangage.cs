@@ -82,7 +82,7 @@ namespace Clank.Core.Generation.Languages
                     Model.Language.ClassDeclaration decl = (Model.Language.ClassDeclaration)inst;
 
                     // Choisis le namespace des enums comme étant celui de State.
-                    if(decl.Name == "State")
+                    if(decl.Name == Core.Model.Language.SemanticConstants.StateClass)
                     {
                         Dictionary<string, string> metadata = new Dictionary<string, string>();
                         theEnumNamespace = GetNamespace(m_project.Types.Types[decl.Name]);
@@ -261,6 +261,8 @@ using System.Text;");
         /// <returns></returns>
         public string GenerateDeserializer(ClassDeclaration decl)
         {
+            if (decl.Name == Core.Model.Language.SemanticConstants.StateClass)
+                return "";
             StringBuilder sb = new StringBuilder();
             ClankType type = m_project.Types.Types[decl.Name];
             string typename = GenerateTypeName(type);
@@ -355,6 +357,9 @@ using System.Text;");
         /// <returns></returns>
         public string GenerateSerializer(ClassDeclaration decl)
         {
+            if (decl.Name == Core.Model.Language.SemanticConstants.StateClass)
+                return "";
+
             StringBuilder sb = new StringBuilder();
             ClankType type = m_project.Types.Types[decl.Name];
             string typename = GenerateTypeName(type);

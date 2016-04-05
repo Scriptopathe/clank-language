@@ -13,6 +13,8 @@ Clank.Server/bin/*
 Clank.Server/obj/*
 Editor/*
 Samples/SampleProject/*
+Samples/ClankDemo/ClankProject/cs/bin/*
+Samples/ClankDemo/ClankProject/cs/obj/*
 Samples/ClankDemo/DemoServer/bin/*
 Samples/ClankDemo/DemoServer/obj/*
 *.exe

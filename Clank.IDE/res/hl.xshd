@@ -36,6 +36,10 @@
 				<Begin>/*</Begin>
 				<End>*/</End>
 			</Span>
+      <Span name = "TargetCode" bold = "false" italic = "true" color = "Green" stopateol = "false" noescapesequences="true">
+        <Begin>%{</Begin>
+        <End>}%</End>
+      </Span>
 			<Span name = "String" bold = "false" italic = "false" color = "#A31515" stopateol = "true" escapecharacter="\">
 				<Begin>"</Begin>
 				<End>"</End>

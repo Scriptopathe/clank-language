@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<ProjectNode xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>My project.</Name>
+  <SavePath>D:\Documents\Projets\C#\ClankDemo\ClankProject\demo.clankproject</SavePath>
+  <SourceFiles>
+    <string>stdtypes.clank</string>
+    <string>main.clank</string>
+  </SourceFiles>
+  <MainFile>main.clank</MainFile>
+  <Settings>
+    <ServerTarget>
+      <LanguageIdentifier>cs</LanguageIdentifier>
+      <OutputDirectory>../DemoServer/Generated/</OutputDirectory>
+    </ServerTarget>
+    <ClientTargets>
+      <GenerationTarget>
+        <LanguageIdentifier>cs</LanguageIdentifier>
+        <OutputDirectory>cs/Generated/</OutputDirectory>
+      </GenerationTarget>
+      <GenerationTarget>
+        <LanguageIdentifier>java</LanguageIdentifier>
+        <OutputDirectory>java/</OutputDirectory>
+      </GenerationTarget>
+    </ClientTargets>
+  </Settings>
+</ProjectNode>

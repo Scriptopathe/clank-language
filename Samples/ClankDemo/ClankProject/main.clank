@@ -1,0 +1,105 @@
+﻿#include stdtypes.clank
+
+main
+{
+
+    state
+    {
+    	// Rajoute les statements using et le bon namespace pour la classe state.
+		void getClassMetadata_cs()
+		{
+			string usingStatements = "";
+			string namespace = "ClankDemo.Generated";
+		}
+		
+        public serializable class Player
+        {
+    		void getClassMetadata_cs()
+    		{
+    			string usingStatements = "";
+    		}
+		
+		
+            int m_x;
+            int m_y;
+            public int getX() { return this.m_x; }
+            public int getY() { return this.m_y; }
+            public void setX(int value) { this.m_x = value; }
+            public void setY(int value) { this.m_y = value; }
+            
+            /**
+            * @brief Définit la position du joueur
+            * @param:x position x
+            * @param:y position y
+            **/
+            public void setPosition(int x, int y) { this.m_x = x; this.m_y = y; }
+        }
+        
+        /* Snapshot of the current server state */
+        public serializable class StateSnapshot
+        {
+            /* The player whose turn it is */
+            public int currentPlayer;
+            /* List of players */
+            public List<Player> players;
+        }
+        
+        /* Server instance */
+        public Server server;
+        public StateSnapshot current;
+    }
+    
+    macro 
+    {
+        public class Server
+        {
+            string name() { string cs = "Server"; }
+            void EndOfTurn(int c) { string cs = %{ @self.EndOfTurn($(c)); }%; }
+        }
+    }
+    
+    access
+    {
+        /** 
+        * @brief termine le tour de l'IA et attend le tour suivant avant de reprendre l'exécution. 
+        */
+        public bool EndOfTurn()
+        {
+            state.server.EndOfTurn(clientId);
+            return true;
+        }
+        
+        /**
+         * @brief Player[index] dsokoqs
+         * @param:player player index
+         * @returns the player
+         */
+        public Player GetPlayer(int player)
+        {
+            return state.current.players.get(player);
+        }
+        
+        
+        // @brief Déplace le joueur playerId
+        // @param:playerId id du joueur.
+        public StateSnapshot Move(int playerId, int x, int y)
+        {
+            if(playerId >= state.current.players.count()) 
+            { 
+                return state.current; 
+            }
+            state.current.players.get(playerId).setPosition(x, y);
+            return state.current;
+        }
+        
+        public int GetMyId()
+        {
+            return clientId;
+        }
+        
+        public int GetPlayerCount()
+        {
+            return state.current.players.count();
+        }
+    }
+}

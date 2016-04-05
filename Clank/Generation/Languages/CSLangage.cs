@@ -51,7 +51,16 @@ namespace Clank.Core.Generation.Languages
         /// <returns></returns>
         string GetNamespace(ClankType type)
         {
-            return GetMetadata(type, "namespace") + (m_isServer ? "" : ".Client");
+            var stateClass = this.m_project.Types.Types[Clank.Core.Model.Language.SemanticConstants.StateClass];
+            string ns = GetMetadata(type, "namespace");
+
+            if(ns == String.Empty && type != stateClass) // on prend celui du state par défaut
+                ns = GetNamespace(stateClass);
+
+            if (ns == String.Empty)
+                ns = "Default";
+
+            return ns;
         }
 
         /// <summary>
@@ -244,7 +253,7 @@ using System.Text;");
             foreach(var vdecl in varDecls)
             {
                 var d = vdecl as VariableDeclarationInstruction;
-                if(d.Var.Type.BaseType.JType == JSONType.Array || d.Var.Type.BaseType.JType == JSONType.Object)
+                if (d.Var.Type.BaseType.JType == JSONType.Array)
                 {
                     b.AppendLine("\t" + d.Var.Name + " = new " + GenerateTypeInstanceName(d.Var.Type) + "();");
                 }

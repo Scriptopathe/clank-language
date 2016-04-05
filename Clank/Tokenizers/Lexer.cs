@@ -27,6 +27,8 @@ namespace Clank.Core.Tokenizers
         public string SingleLineComment { get; set; }
         public string MultilineCommentStart { get; set; }
         public string MultilineCommentEnd { get; set; }
+        public string CodeStart { get; set; }
+        public string CodeEnd { get; set; }
         
         /// <summary>
         /// Crée une nouvelle instance du lexer pour le string donné.
@@ -39,6 +41,8 @@ namespace Clank.Core.Tokenizers
             MultilineCommentEnd = "*/";
             StringDelimiter = "\"";
             EscapeChar = '\\';
+            CodeStart = "%{";
+            CodeEnd = "}%";
         }
 
         /// <summary>
@@ -164,6 +168,20 @@ namespace Clank.Core.Tokenizers
             if (value && updateStreamPosition)
                 Next(StringDelimiter.Length * 2 + content.Length);
 
+            return value;
+        }
+
+        /// <summary>
+        /// Obtient une valeur indiquant si un bloc de target code a pu être parsé.
+        /// Le string parsé sera copié dans content le cas échéant.
+        /// </summary>
+        /// <param name="updateStreamPosition">Si true, la position du flux est mise à jour pour être la position de fin du pattern.</param>
+        /// <returns></returns>
+        public bool MatchTargetCode(out string content, bool updateStreamPosition=true)
+        {
+            bool value = MatchGroup(CodeStart, CodeEnd, '\0', out content);
+            if (value && updateStreamPosition)
+                Next(CodeStart.Length + CodeEnd.Length + content.Length - 1);
             return value;
         }
 

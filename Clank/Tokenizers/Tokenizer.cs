@@ -48,6 +48,12 @@ namespace Clank.Core.Tokenizers
                 bool parseComments = !isParsingString;
                 string comment = "";
                 bool commentFound = parseComments && lex.MatchComment(out comment, true);
+
+                // Target code
+                bool parseCodeSections = !isParsingString && !commentFound;
+                string code = "";
+                bool codeFound = parseCodeSections && lex.MatchTargetCode(out code, true);
+                
                 if (commentFound)
                 {
                     #region Comment
@@ -56,6 +62,13 @@ namespace Clank.Core.Tokenizers
                     #endregion
 
                     continue;
+                }
+                else if(codeFound)
+                {
+                    #region Code
+                    Token c = new Token(code, Token.TokenType.StringLiteral, line, charIndex, source);
+                    tokens.Add(c);
+                    #endregion
                 }
                 else
                 {
@@ -255,7 +268,8 @@ namespace Clank.Core.Tokenizers
                 lex.Next();
             }
 
-            return SolveUnresolvedTokens(tokens);
+            var resolved = SolveUnresolvedTokens(tokens);
+            return resolved;
         }
         
         /// <summary>

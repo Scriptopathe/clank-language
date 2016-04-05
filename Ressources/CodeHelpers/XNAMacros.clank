@@ -1,0 +1,58 @@
+﻿main
+{
+    state
+    {
+        public serializable class Vector2
+        {
+        	// Rajoute les statements using et le bon namespace pour la classe state.
+    		void getClassMetadata_cs()
+    		{
+    			string usingStatements = "";
+    			string namespace = "Codinsa2015.Views";
+    		}
+    		public constructor Vector2 new(float x, float y) 
+    		{
+    		    this.X = x;
+    		    this.Y = y;
+    		}
+            public float X;
+            public float Y;
+        }
+    }
+    macro
+    {
+        public serializable class Vector2Macro
+        {
+            string name()
+            {
+                string cs = "Vector2";
+                string java = "Vector2";
+                string cpp = "Vector2";
+                string python = "Vector2";
+            }
+            
+            float getX()
+            {
+                string cs = "@self.X";
+            }
+            
+            float getY()
+            {
+                string cs = "@self.Y";
+            }
+            
+            void setX(float value)
+            {
+                string cs = "@self.X = $(value)";
+            }
+            
+            void setY(float value)
+            {
+                string cs = "@self.Y = $(value)";
+            }
+        }
+        
+        
+    
+    }
+}

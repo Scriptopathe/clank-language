@@ -1,0 +1,16 @@
+*.suo
+*.pdb
+*.config
+Clank.Compiler/bin/*
+Clank.Compiler/obj/*
+Clank.IDE/bin/*
+Clank.IDE/obj/*
+Clank.Core/bin/*
+Clank.Core/obj/*
+Clank/bin/*
+Clank/obj/*
+Clank.Server/bin/*
+Clank.Server/obj/*
+Editor/*
+SampleProject/Server/*
+SampleProject/Gen/*

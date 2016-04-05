@@ -320,8 +320,14 @@ namespace Clank.Core.Model.Semantic
 
                 // Variables du contexte parent
                 if(ParentContext != null)
-                    foreach (var kvp in ParentContext.Variables)
-                        variables.Add(kvp.Key, kvp.Value);
+                    foreach (var kvp in ParentContext.GetAllVariables())
+                    {
+                        if (variables.ContainsKey(kvp.Key))
+                            variables[kvp.Key] = kvp.Value;
+                        else
+                            variables.Add(kvp.Key, kvp.Value);
+                    }
+                        
 
                 // Ajout de this
                 if (Container != null)
